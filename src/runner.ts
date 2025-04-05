@@ -10,6 +10,7 @@ import { associatedCompany } from './tasks/hubspot/associated_company'
 import { otherContactsInCompany } from './tasks/hubspot/other_contacts_in_company'
 import { associatedDeal } from './tasks/hubspot/associated_deal'
 import { contactsInDeal } from './tasks/hubspot/contacts_in_deal'
+import { contactActivities } from './tasks/hubspot/contact_activities'
 
 const runner = new Runner()
 
@@ -23,5 +24,6 @@ runner.load('get_hubspot_associated_company', associatedCompany)
 runner.load('get_hubspot_contacts_in_company', otherContactsInCompany)
 runner.load('get_hubspot_associated_deal', associatedDeal)
 runner.load('get_hubspot_contacts_in_deal', contactsInDeal)
+runner.load('get_hubspot_contact_activities', contactActivities)
 
 export default runner
