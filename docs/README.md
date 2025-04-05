@@ -1,40 +1,91 @@
-# MCP Server Documentation
+# ForgeHive Documentation
 
-This directory contains documentation for the Model Context Protocol (MCP) server implementation.
+Welcome to the ForgeHive documentation! This directory contains comprehensive documentation for the ForgeHive libraries.
 
-## What is MCP?
+## Libraries
 
-The Model Context Protocol (MCP) is a standard that enables AI assistants to interact with external services and data sources. This server implementation allows AI assistants like Claude to access tools and data through a standardized interface.
+### Schema Library
 
-## Server Architecture
+The [Schema Library](./schema.md) provides a powerful, type-safe way to define data structures and validate data against those structures. It's built on top of [Zod](https://github.com/colinhacks/zod) and provides a simplified, consistent API for schema definition and validation.
 
-The server is built using TypeScript and follows a task-based architecture:
+Key features:
+- Type-safe schema definitions
+- Comprehensive validation options
+- TypeScript type inference
+- Integration with the Task library
 
-- `src/index.ts`: The main entry point for the MCP server
-- `src/runner.ts`: Task runner for managing and executing tasks
-- `src/tasks/`: Directory containing all available tasks
+[Read the Schema documentation](./schema.md)
 
-## Creating New Tasks
+### Task Library
 
-Tasks are the building blocks of the MCP server. Each task implements a specific functionality that can be accessed by AI assistants.
+The [Task Library](./task.md) provides a powerful, type-safe way to define and execute tasks with input validation, boundary separation, and execution tracking. It's designed to work seamlessly with the Schema library for input validation.
 
-To create a new task:
+Key features:
+- Input validation using schemas
+- Boundary separation for better testability
+- Execution modes (proxy, replay, etc.)
+- Listener support for tracking task execution
 
-1. Create a new TypeScript file in the appropriate subdirectory of `src/tasks/`
-2. Implement the task following the `ForgeTask` interface
-3. Register the task in `src/runner.ts`
+[Read the Task documentation](./task.md)
 
-See the existing tasks for examples of how to implement and register tasks.
+## Getting Started
 
-## Task Structure
+To get started with ForgeHive libraries, install them in your project:
 
-A typical task implementation includes:
+```bash
+# Install the Schema library
+npm install @forgehive/schema
 
-- Input schema: Defines the expected input parameters
-- Output schema: Defines the structure of the returned data
-- Run function: Implements the actual task logic
+# Install the Task library
+npm install @forgehive/task
+```
 
-## Testing Tasks
+Then, import and use them in your code:
 
-You can test tasks directly using the Forge CLI:
+```typescript
+import { Schema } from '@forgehive/schema';
+import { createTask } from '@forgehive/task';
 
+// Define a schema
+const userSchema = new Schema({
+  name: Schema.string(),
+  email: Schema.string().email()
+});
+
+// Define boundaries
+const boundaries = {
+  saveUser: async (user) => { /* ... */ }
+};
+
+// Create a task
+const createUser = createTask(
+  userSchema,
+  boundaries,
+  async (input, boundaries) => {
+    await boundaries.saveUser(input);
+    return { success: true };
+  }
+);
+
+// Run the task
+const result = await createUser.run({
+  name: 'John Doe',
+  email: 'john@example.com'
+});
+```
+
+## Examples
+
+Check out the documentation for each library for detailed examples and usage patterns.
+
+## Contributing
+
+If you'd like to contribute to the documentation, please follow these guidelines:
+
+1. Fork the repository
+2. Make your changes
+3. Submit a pull request
+
+## License
+
+These libraries are licensed under the MIT License. See the LICENSE file for details. 

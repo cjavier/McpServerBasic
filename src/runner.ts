@@ -1,20 +1,11 @@
-import { ForgeRunner } from '@forgehive/forge-runner';
-import { stockPrice } from './tasks/stock/price';
+import { Runner } from '@forgehive/runner'
 
-// Create the runner instance
-export const runner = new ForgeRunner();
+import { price } from './tasks/stock/price'
+import { portafolio } from './tasks/stock/portafolio'
 
-// Register all tasks here
-runner.load('stock:price', stockPrice);
+const runner = new Runner()
 
-// Auto-register all tasks to avoid manual registration
-// You could also use directory scanning to automate this further
-export function autoRegisterTasks() {
-  // This is a placeholder for auto-registration logic
-  // In a more complex application, this could scan the tasks directory
-  // and automatically register all tasks found
-  console.log('Auto-registered tasks:', Object.keys(runner.getTasks()));
-}
+runner.load('get_stock_price', price)
+runner.load('get_stock_portafolio', portafolio)
 
-// Initialize auto-registration
-autoRegisterTasks();
+export default runner

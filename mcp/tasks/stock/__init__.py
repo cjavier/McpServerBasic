@@ -1,1 +1,0 @@
-# Stock tasks package initialization
