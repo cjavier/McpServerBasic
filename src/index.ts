@@ -10,7 +10,7 @@ import runner from "./runner";
 
 // Create server instance
 const server = new McpServer({
-  name: "hello-mcp-server",
+  name: "husbspot-mcp-server",
   version: "1.0.0",
   capabilities: {
     resources: {},
