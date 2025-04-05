@@ -1,6 +1,6 @@
-// TASK: contact
+// TASK: lead
 // Run this task with:
-// forge task:run hubspot:contact --contactId 123456
+// forge task:run hubspot:lead --leadId 123456
 
 import { createTask } from '@forgehive/task'
 import { Schema } from '@forgehive/schema'
@@ -11,7 +11,7 @@ import axios, { AxiosError } from 'axios'
 dotenv.config()
 
 const schema = new Schema({
-  contactId: Schema.string().describe('Hubspot contact ID to retrieve')
+  leadId: Schema.string().describe('Hubspot lead ID to retrieve')
 })
 
 const boundaries = {
@@ -38,15 +38,15 @@ const boundaries = {
   }
 }
 
-export const contact = createTask(
+export const lead = createTask(
   schema,
   boundaries,
-  async function ({ contactId }, { fetchHubspotApi }) {
+  async function ({ leadId }, { fetchHubspotApi }) {
     try {
-      // Call Hubspot contacts API to get contact by ID
-      const data = await fetchHubspotApi(`objects/contacts/${contactId}`)
+      // Call Hubspot leads API to get lead by ID
+      const data = await fetchHubspotApi(`objects/leads/${leadId}`)
       
-      // Return contact data
+      // Return lead data
       return {
         id: data.id,
         properties: data.properties,
@@ -64,4 +64,4 @@ export const contact = createTask(
   }
 )
 
-contact.setDescription('Get a Hubspot contact by ID')
+lead.setDescription('Get a Hubspot lead by ID') 
