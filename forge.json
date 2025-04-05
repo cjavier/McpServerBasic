@@ -1,0 +1,45 @@
+{
+  "manifest": {
+    "name": "hello-mcp-server",
+    "version": "1.0.0",
+    "description": "A Model Context Protocol server implementation",
+    "author": "Example Author",
+    "license": "MIT"
+  },
+  "tasks": {
+    "stock:price": {
+      "description": "Get the current price of a stock by its ticker symbol",
+      "input": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol (e.g., AAPL for Apple Inc.)"
+          }
+        },
+        "required": ["ticker"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol"
+          },
+          "price": {
+            "type": "number",
+            "description": "The current stock price"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency of the price (e.g., USD)"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp when the price was fetched"
+          }
+        }
+      }
+    }
+  }
+}
