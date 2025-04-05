@@ -21,6 +21,10 @@
     "stock:portafolio": {
       "path": "src/tasks/stock/portafolio.ts",
       "handler": "portafolio"
+    },
+    "hubspot:contact": {
+      "path": "src/tasks/hubspot/contact.ts",
+      "handler": "contact"
     }
   },
   "runners": {}
